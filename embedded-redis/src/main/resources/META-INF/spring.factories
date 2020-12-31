@@ -1,0 +1,1 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.netodevel.eb.redis.EmbeddedRedisAutoConfiguration
