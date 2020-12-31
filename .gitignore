@@ -27,6 +27,7 @@ hs_err_pid*
 
 .idea/
 
-./kits/target/
-./embedded-redis/target/
+target/
 
+elasticsearch-6.8.0.zip
+elasticsearch-6.8.0.zip-downloaded

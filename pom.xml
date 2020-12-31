@@ -10,6 +10,7 @@
     <modules>
         <module>kits</module>
         <module>embedded-redis</module>
+        <module>embedded-elastic-search</module>
     </modules>
     <dependencies>
         <dependency>
