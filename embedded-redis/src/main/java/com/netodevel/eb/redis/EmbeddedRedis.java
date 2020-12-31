@@ -29,6 +29,10 @@ public class EmbeddedRedis implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() {
+        if (isDisabled()) {
+            return;
+        }
+
         try {
             this.redisServer = new RedisServer(getPort());
         } catch (IOException e) {
@@ -38,6 +42,11 @@ public class EmbeddedRedis implements InitializingBean {
         log.info("Redis started. Listening on tcp://127.0.0.1:" + getPort());
 
         installExitHook();
+
+    }
+
+    private boolean isDisabled() {
+        return Boolean.FALSE.equals(props.getActive());
     }
 
     public Integer getPort() {

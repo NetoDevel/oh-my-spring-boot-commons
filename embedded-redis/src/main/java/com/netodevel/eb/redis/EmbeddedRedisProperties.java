@@ -6,6 +6,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class EmbeddedRedisProperties {
 
     private Integer port;
+    private Boolean active;
 
     public Integer getPort() {
         return port;
@@ -13,5 +14,13 @@ public class EmbeddedRedisProperties {
 
     public void setPort(Integer port) {
         this.port = port;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 }

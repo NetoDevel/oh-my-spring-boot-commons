@@ -8,6 +8,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Configuration;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class EmbeddedRedisAutoConfigurationTest {
@@ -27,6 +28,7 @@ public class EmbeddedRedisAutoConfigurationTest {
     @Test
     public void shouldStartRedis() {
         System.setProperty("embedded.redis.port", "6379");
+        System.setProperty("embedded.redis.active", "true");
 
         context.register(Config.class);
         context.register(EmbeddedRedisAutoConfiguration.class);
@@ -38,8 +40,10 @@ public class EmbeddedRedisAutoConfigurationTest {
     }
 
     @Test
-    public void shouldStartRedisOtherPort() throws InterruptedException {
+    public void shouldStartRedisOtherPort() {
         System.setProperty("embedded.redis.port", "6378");
+        System.setProperty("embedded.redis.active", "true");
+
 
         context.register(Config.class);
         context.register(EmbeddedRedisAutoConfiguration.class);
@@ -49,10 +53,25 @@ public class EmbeddedRedisAutoConfigurationTest {
         assertTrue(expected);
     }
 
+    @Test
+    public void shouldNotStartRedis()  {
+        System.setProperty("embedded.redis.active", "false");
+        System.setProperty("embedded.redis.port", "6379");
+
+        context.register(Config.class);
+        context.register(EmbeddedRedisAutoConfiguration.class);
+        context.refresh();
+
+        Boolean expected = SocketKit.isPortAlreadyUsed(6379);
+        assertFalse(expected);
+    }
+
     @After
     public void tearDown() {
         final EmbeddedRedis redisBean = context.getBean(EmbeddedRedis.class);
-        redisBean.getRedisServer().stop();
+        if (redisBean.getRedisServer() != null) {
+            redisBean.getRedisServer().stop();
+        }
         context.close();
     }
 

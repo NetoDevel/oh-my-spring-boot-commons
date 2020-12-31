@@ -1,7 +1,6 @@
 # oh-my-spring-boot-commons
 several common things I use on a daily basis with spring boot :)
 
-
 ### Goal
 
 keep all things in common in a single project to avoid duplication of code.
@@ -39,7 +38,13 @@ Of course, only things like: Utility Class, Tests Setups
 
 Goal: Run services with Auto Configuration of Spring Boot to run integrated tests.
 
-
 * Embedded Redis
   
   `just add dependecy`
+  
+  * props
+  
+  `embedded.redis.port=6379`
+  
+  `embedded.redis.active=true`
+  

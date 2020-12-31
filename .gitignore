@@ -27,6 +27,6 @@ hs_err_pid*
 
 .idea/
 
-./kits/target
-./embedded-redis/target
+./kits/target/
+./embedded-redis/target/
 
