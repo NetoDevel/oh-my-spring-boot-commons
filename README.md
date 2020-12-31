@@ -39,7 +39,7 @@ Of course, only things like: Utility Class, Tests Setups
 Goal: Run services with Auto Configuration of Spring Boot to run integrated tests.
 
 * Embedded Redis
-  
+    
   `just add dependecy`
   
   * props
