@@ -33,7 +33,9 @@ public class EmbeddedElasticSearch implements InitializingBean, DisposableBean {
 
     @Override
     public void destroy() {
-        embeddedElastic.stop();
+        if (getActive()) {
+            embeddedElastic.stop();
+        }
     }
 
     @Override
@@ -51,20 +53,22 @@ public class EmbeddedElasticSearch implements InitializingBean, DisposableBean {
                 .withCleanInstallationDirectoryOnStop(true)
                 .build();
 
-        log.info("Embedded ElasticSearch starting..");
-        embeddedElastic.start();
-        log.info("Embedded ElasticSearch started. Listening on tcp://127.0.0.1:" + getPort());
+        if (getActive()) {
+            log.info("Embedded ElasticSearch starting..");
+            embeddedElastic.start();
+            log.info("Embedded ElasticSearch started. Listening on tcp://127.0.0.1:" + getPort());
+        }
     }
 
     private String getIndex() {
-        if (props == null || props.getIndex() == null){
+        if (props == null || props.getIndex() == null) {
             throw new IllegalArgumentException("index name can not be null");
         }
         return props.getIndex();
     }
 
     private String getType() {
-        if (props == null || props.getType() == null){
+        if (props == null || props.getType() == null) {
             throw new IllegalArgumentException("index name can not be null");
         }
         return props.getType();
@@ -85,6 +89,14 @@ public class EmbeddedElasticSearch implements InitializingBean, DisposableBean {
     public Integer getPort() {
         if (this.props != null && this.props.getPort() != null) return this.props.getPort();
         return 9200;
+    }
+
+    private boolean getActive() {
+        return props != null && props.getActive();
+    }
+
+    public EmbeddedElastic getEmbeddedElastic() {
+        return embeddedElastic;
     }
 
 }

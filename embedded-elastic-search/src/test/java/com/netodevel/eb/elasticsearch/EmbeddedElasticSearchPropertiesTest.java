@@ -74,4 +74,16 @@ public class EmbeddedElasticSearchPropertiesTest {
         assertEquals("my-type", props.getType());
     }
 
+    @Test
+    public void shouldReturnActive() {
+        System.setProperty("embedded.elasticsearch.active", "false");
+
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+        context.register(Config.class);
+        context.refresh();
+
+        final EmbeddedElasticSearchProperties props = context.getBean(EmbeddedElasticSearchProperties.class);
+        assertEquals(false, props.getActive());
+    }
+
 }

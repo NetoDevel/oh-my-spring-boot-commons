@@ -10,6 +10,7 @@ public class EmbeddedElasticSearchProperties {
     private String setting;
     private String index;
     private String type;
+    private Boolean active;
 
     public Integer getPort() {
         return port;
@@ -49,5 +50,13 @@ public class EmbeddedElasticSearchProperties {
 
     public void setIndex(String index) {
         this.index = index;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 }
