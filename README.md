@@ -64,8 +64,11 @@ Goal: Run services with Auto Configuration of Spring Boot to run integrated test
   * props (required props)
   
   `embedded.elasticsearch.mapping=test-mapping.json");`
+  
   `embedded.elasticsearch.setting=test-setting.json");`
+  
   `embedded.elasticsearch.index=index-name");`
+  
   `embedded.elasticsearch.type=_doc");`
   
   (optional props)
