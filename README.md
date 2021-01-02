@@ -10,7 +10,9 @@ Of course, only things like: Utility Class, Tests Setups
 
 * StringKit
 * SocketKit
+* FileKit
 * Embedded Redis
+* Embedded ElasticSearch
 
 ### Documentation
 
@@ -55,3 +57,17 @@ Goal: Run services with Auto Configuration of Spring Boot to run integrated test
   
   `embedded.redis.active=true`
   
+* Embedded ElasticSearch
+    
+  `just add dependecy`
+  
+  * props (required props)
+  
+  `embedded.elasticsearch.mapping=test-mapping.json");`
+  `embedded.elasticsearch.setting=test-setting.json");`
+  `embedded.elasticsearch.index=index-name");`
+  `embedded.elasticsearch.type=_doc");`
+  
+  (optional props)
+  
+  `embedded.elasticsearch.port=9200);`
