@@ -1,7 +1,6 @@
 package com.netodevel.eb.elasticsearch;
 
 import com.netodevel.helpers.SocketKit;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -20,6 +19,8 @@ public class EmbeddedElasticSearchAutoConfigurationTest {
     public void shoudStartEmbeddedElasitcSearch() {
         System.setProperty("embedded.elasticsearch.mapping", "test-mapping.json");
         System.setProperty("embedded.elasticsearch.setting", "test-setting.json");
+        System.setProperty("embedded.elasticsearch.index", "index-name");
+        System.setProperty("embedded.elasticsearch.type", "_doc");
 
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
         context.register(Config.class);

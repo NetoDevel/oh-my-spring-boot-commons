@@ -18,6 +18,8 @@ public class EmbeddedElasticSearchTest {
         properties.setPort(9200);
         properties.setMapping("test-mapping.json");
         properties.setSetting("test-setting.json");
+        properties.setIndex("any-index");
+        properties.setType("_doc");
 
         embeddedElasticSearch = new EmbeddedElasticSearch(properties);
         embeddedElasticSearch.afterPropertiesSet();

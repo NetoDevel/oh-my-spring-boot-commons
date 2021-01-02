@@ -45,7 +45,7 @@ public class EmbeddedElasticSearch implements InitializingBean, DisposableBean {
                 .withEsJavaOpts("-Xms128m -Xmx512m")
                 .withSetting("cluster.routing.allocation.disk.threshold_enabled", false)
                 .withStartTimeout(2, TimeUnit.MINUTES)
-                .withIndex("debentures", getIndexSettings())
+                .withIndex(getIndex(), getIndexSettings())
                 .withDownloadDirectory(new File("./"))
                 .withInstallationDirectory(new File("./"))
                 .withCleanInstallationDirectoryOnStop(true)
@@ -56,8 +56,22 @@ public class EmbeddedElasticSearch implements InitializingBean, DisposableBean {
         log.info("Embedded ElasticSearch started. Listening on tcp://127.0.0.1:" + getPort());
     }
 
+    private String getIndex() {
+        if (props == null || props.getIndex() == null){
+            throw new IllegalArgumentException("index name can not be null");
+        }
+        return props.getIndex();
+    }
+
+    private String getType() {
+        if (props == null || props.getType() == null){
+            throw new IllegalArgumentException("index name can not be null");
+        }
+        return props.getType();
+    }
+
     private IndexSettings getIndexSettings() {
-        return new IndexSettings(asList(new TypeWithMapping("_doc", getValueMapping())), Optional.of(getValueSetting()));
+        return new IndexSettings(asList(new TypeWithMapping(getType(), getValueMapping())), Optional.of(getValueSetting()));
     }
 
     private String getValueSetting() {

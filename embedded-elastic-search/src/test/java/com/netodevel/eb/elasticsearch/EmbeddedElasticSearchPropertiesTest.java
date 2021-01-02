@@ -50,4 +50,28 @@ public class EmbeddedElasticSearchPropertiesTest {
         assertEquals("my-setting.json", props.getSetting());
     }
 
+    @Test
+    public void shouldReturnIndex() {
+        System.setProperty("embedded.elasticsearch.index", "my-index");
+
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+        context.register(Config.class);
+        context.refresh();
+
+        final EmbeddedElasticSearchProperties props = context.getBean(EmbeddedElasticSearchProperties.class);
+        assertEquals("my-index", props.getIndex());
+    }
+
+    @Test
+    public void shouldReturnType() {
+        System.setProperty("embedded.elasticsearch.type", "my-type");
+
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+        context.register(Config.class);
+        context.refresh();
+
+        final EmbeddedElasticSearchProperties props = context.getBean(EmbeddedElasticSearchProperties.class);
+        assertEquals("my-type", props.getType());
+    }
+
 }

@@ -8,6 +8,8 @@ public class EmbeddedElasticSearchProperties {
     private Integer port;
     private String mapping;
     private String setting;
+    private String index;
+    private String type;
 
     public Integer getPort() {
         return port;
@@ -31,5 +33,21 @@ public class EmbeddedElasticSearchProperties {
 
     public void setSetting(String setting) {
         this.setting = setting;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getIndex() {
+        return index;
+    }
+
+    public void setIndex(String index) {
+        this.index = index;
     }
 }
