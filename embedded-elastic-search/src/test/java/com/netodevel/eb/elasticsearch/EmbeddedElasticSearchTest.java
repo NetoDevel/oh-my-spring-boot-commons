@@ -10,10 +10,16 @@ import static org.junit.Assert.assertTrue;
 public class EmbeddedElasticSearchTest {
 
     private EmbeddedElasticSearch embeddedElasticSearch;
+    private EmbeddedElasticSearchProperties properties;
 
     @Before
     public void setUp() throws Exception {
-        embeddedElasticSearch = new EmbeddedElasticSearch();
+        properties = new EmbeddedElasticSearchProperties();
+        properties.setPort(9200);
+        properties.setMapping("test-mapping.json");
+        properties.setSetting("test-setting.json");
+
+        embeddedElasticSearch = new EmbeddedElasticSearch(properties);
         embeddedElasticSearch.afterPropertiesSet();
     }
 
@@ -24,7 +30,7 @@ public class EmbeddedElasticSearchTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         embeddedElasticSearch.destroy();
     }
 

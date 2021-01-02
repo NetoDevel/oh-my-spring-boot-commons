@@ -1,5 +1,6 @@
 package com.netodevel.eb.elasticsearch;
 
+import com.netodevel.helpers.FileKit;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.DisposableBean;
@@ -13,6 +14,7 @@ import java.io.File;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
+import static java.lang.ClassLoader.getSystemResourceAsStream;
 import static java.util.Arrays.asList;
 
 public class EmbeddedElasticSearch implements InitializingBean, DisposableBean {
@@ -55,11 +57,19 @@ public class EmbeddedElasticSearch implements InitializingBean, DisposableBean {
     }
 
     private IndexSettings getIndexSettings() {
-        return new IndexSettings(asList(new TypeWithMapping("_doc", props.getMapping())), Optional.of(props.getSetting()));
+        return new IndexSettings(asList(new TypeWithMapping("_doc", getValueMapping())), Optional.of(getValueSetting()));
+    }
+
+    private String getValueSetting() {
+        return FileKit.inputStreamToString(getSystemResourceAsStream(props.getSetting()));
+    }
+
+    private String getValueMapping() {
+        return FileKit.inputStreamToString(getSystemResourceAsStream(props.getMapping()));
     }
 
     public Integer getPort() {
-        if (this.props.getPort() != null) return this.props.getPort();
+        if (this.props != null && this.props.getPort() != null) return this.props.getPort();
         return 9200;
     }
 

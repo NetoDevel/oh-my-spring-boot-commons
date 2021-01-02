@@ -17,10 +17,9 @@ public class EmbeddedElasticSearchAutoConfigurationTest {
     }
 
     @Test
-    @Ignore
     public void shoudStartEmbeddedElasitcSearch() {
-        System.setProperty("embedded.elasticsearch.mapping", "my-mapping.json");
-        System.setProperty("embedded.elasticsearch.setting", "my-setting.json");
+        System.setProperty("embedded.elasticsearch.mapping", "test-mapping.json");
+        System.setProperty("embedded.elasticsearch.setting", "test-setting.json");
 
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
         context.register(Config.class);
