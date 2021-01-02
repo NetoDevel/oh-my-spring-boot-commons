@@ -34,6 +34,13 @@ Of course, only things like: Utility Class, Tests Setups
     SocketKit.isPortAlreadyUsed(6379);
 ```
 
+* FileKit
+
+```java
+    FileKit.inputStreamToString(inputStream);
+    FileKit.inputStreamToString(inputStream, "\n");
+```
+
 #### Embedded Servers For Integration Tests
 
 Goal: Run services with Auto Configuration of Spring Boot to run integrated tests.
